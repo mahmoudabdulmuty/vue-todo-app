@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Todo App</h1>
+  <add-todo @add-todo="addTodo"></add-todo>
+  <display-todos :todos="todos" @delete-todo="deleteTodo"></display-todos>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AddTodo from "./components/AddTodo";
+import displayTodos from "./components/displayTodos";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { AddTodo, displayTodos },
+  data() {
+    return {
+      todos: [],
+    };
+  },
+  methods: {
+    addTodo(todo) {
+      this.todos.push(todo);
+    },
+    deleteTodo(index) {
+      this.todos = this.todos.filter((todo, i) => i !== index);
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
